@@ -1,0 +1,3 @@
+[submodule "srv-pagamento"]
+	path = srv-pagamento
+	url = https://github.com/DiogoHumberto/srv-pagamento.git
