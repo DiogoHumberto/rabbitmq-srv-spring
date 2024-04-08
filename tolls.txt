@@ -1,3 +1,11 @@
 https://tryrabbitmq.com
 
 ** Simulador Rabbit alterando Exchange 
+
+Direct: Esse tipo de exchange é usada, geralmente, quando desejamos enviar mensagens para um consumidor específico. Para isso, utilizamos uma routing key, que é uma chave enviada junto com a mensagem para que a exchange identifique qual a fila irá receber a mensagem.
+
+Fanout: Quando enviamos uma mensagem para uma exchange desse tipo, ela vai ser enviada para todas as filas que estiverem ligadas a essa exchange. Ou seja, se existirem 30 filas ligadas a essa exchange, essas 30 filas receberão a mensagem. Para conectar uma fila a uma exchange é preciso criar um bind, que é uma relação (ou vínculo) entre uma fila e uma exchange. Nomeia-se como binding key essa chave de ligação entre a fila e a exchange.
+
+Headers: É um tipo muito menos usado, mas basicamente ignora o routing key e passa no próprio cabeçalho da mensagem para qual binding key deve ser encaminhada a mensagem.
+
+Topic: A palavra-chave desse tipo de exchange é flexibilidade. Você pode nomear as binding keys de uma forma a criar padrões e/ou regras para que o envio seja de forma personalizada. Essas binding keys são descritas como se fossem expressões regulares. Dessa forma, podemos fazer composições para que mais de um consumidor receba as mensagens. Vou exemplificar abaixo:
