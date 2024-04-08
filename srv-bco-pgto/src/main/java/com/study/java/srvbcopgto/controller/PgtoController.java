@@ -36,7 +36,7 @@ public class PgtoController {
         return ResponseEntity.created(url).body(respDto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{uuid}")
     public ResponseEntity<PgtoDto> detalhar(@PathVariable @NotNull UUID uuid) {
 
         return ResponseEntity.ok(service.obterPorId(uuid));
