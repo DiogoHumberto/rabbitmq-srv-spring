@@ -6,3 +6,7 @@
 	path = srv-pedido
 	url = https://github.com/DiogoHumberto/srv-pedido.git
 	branch = master
+[submodule "srv-entrega"]
+	path = srv-entrega
+	url = https://github.com/DiogoHumberto/srv-entrega.git
+	branch = master

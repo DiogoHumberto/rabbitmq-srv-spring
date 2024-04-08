@@ -1,0 +1,3 @@
+https://tryrabbitmq.com
+
+** Simulador Rabbit alterando Exchange 
