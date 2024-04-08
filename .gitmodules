@@ -1,3 +1,7 @@
 [submodule "srv-pagamento"]
 	path = srv-pagamento
 	url = https://github.com/DiogoHumberto/srv-pagamento.git
+[submodule "srv-pedido"]
+	path = srv-pedido
+	url = https://github.com/DiogoHumberto/srv-pedido.git
+	branch = master
