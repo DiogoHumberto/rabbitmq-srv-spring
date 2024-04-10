@@ -1,0 +1,10 @@
+# Para que o comportamento dos nós atuem de forma a capturar msg de filas e replicar-las é necessario criar uma politica:
+
+Replicando para todas ex:
+
+Name: Ha
+
+Pattern: .*
+
+Definition: ha-mode = all
+

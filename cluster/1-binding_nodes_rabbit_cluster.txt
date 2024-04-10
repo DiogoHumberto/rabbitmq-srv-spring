@@ -1,0 +1,26 @@
+# Após executado docker-compose up -d 
+
+
+# Realizar o rabbitmqctl no rabbit1 para habilitar nodes
+
+docker-compose exec rabbitmq1 rabbitmqctl stop_app
+docker-compose exec rabbitmq1 rabbitmqctl reset
+docker-compose exec rabbitmq1 rabbitmqctl start_app
+# docker-compose exec rabbitmq1 rabbitmqctl cluster_status
+
+# Realizar binding dos node do rabbit2 ao nó rabbit1
+
+docker-compose exec rabbitmq2 rabbitmqctl stop_app
+docker-compose exec rabbitmq2 rabbitmqctl reset
+docker-compose exec rabbitmq2 rabbitmqctl join_cluster rabbit@rabbitmq1
+docker-compose exec rabbitmq2 rabbitmqctl start_app
+
+# Realizar binding dos node do rabbit3 ao nó rabbit1 ...
+
+docker-compose exec rabbitmq3 rabbitmqctl stop_app
+docker-compose exec rabbitmq3 rabbitmqctl reset
+docker-compose exec rabbitmq3 rabbitmqctl join_cluster rabbit@rabbitmq1
+docker-compose exec rabbitmq3 rabbitmqctl start_app
+
+
+

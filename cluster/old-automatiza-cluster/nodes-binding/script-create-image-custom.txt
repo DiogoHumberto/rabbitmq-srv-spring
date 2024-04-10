@@ -1,0 +1,9 @@
+# Criado um script que aguarda o node principal iniciar
+
+# fizemos uma image custom do rabbitMq para carregar o script 
+
+# Geramos o build do dockerfile : docker build -t myrabbitmq:latest .
+
+# Fazemos o nosso docker compose com base nessa image
+
+# Executamos os clusters docker-compose up -d

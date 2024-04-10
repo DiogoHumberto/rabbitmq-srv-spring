@@ -1,0 +1,50 @@
+services:
+  rabbitmq1:
+    image: rabbitmq:3.8-management
+    hostname: rabbit1
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rDlMa6F69D9Jx9lZ5v4Gp7n9ZcT4QNb5
+      - RABBITMQ_NODENAME=rabbit@rabbitmq1
+      - HOST_NAME_NODE=rabbitmq1
+    volumes:
+      - rabbitmq1-data:/var/lib/rabbitmq
+      - "./scripts:/scripts" # Mapeando o diretório local para dentro do contêiner
+    command: ["sh","/scripts/join-cluster-rabbitmq1.sh"]
+
+  rabbitmq2:
+    image: rabbitmq:3.8-management
+    hostname: rabbit2
+    ports:
+      - "5674:5672"
+      - "15674:15672"
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rDlMa6F69D9Jx9lZ5v4Gp7n9ZcT4QNb5
+      - RABBITMQ_NODENAME=rabbit@rabbitmq2
+      - HOST_NAME_NODE=rabbitmq2
+    volumes:
+      - rabbitmq2-data:/var/lib/rabbitmq
+      - "./scripts:/scripts" # Mapeando o diretório local para dentro do contêiner
+    command: ["sh","/scripts/join-cluster-rabbitmq2.sh"]
+
+  rabbitmq3:
+    image: rabbitmq:3.8-management
+    hostname: rabbit3
+    ports:
+      - "5675:5672"
+      - "15675:15672"
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rDlMa6F69D9Jx9lZ5v4Gp7n9ZcT4QNb5
+      - RABBITMQ_NODENAME=rabbit@rabbitmq3
+      - HOST_NAME_NODE=rabbitmq3
+    volumes:
+      - rabbitmq3-data:/var/lib/rabbitmq
+      - "./scripts:/scripts" # Mapeando o diretório local para dentro do contêiner
+    command: ["sh","/scripts/join-cluster-rabbitmq3.sh"]
+
+volumes:
+  rabbitmq1-data:
+  rabbitmq2-data:
+  rabbitmq3-data:

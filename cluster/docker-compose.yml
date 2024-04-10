@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  rabbitmq1:
+    image: rabbitmq:3.8-management
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rDlMa6F69D9Jx9lZ5v4Gp7n9ZcT4QNb5
+      - RABBITMQ_NODENAME=rabbit@rabbitmq1 
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+
+  rabbitmq2:
+    image: rabbitmq:3.8-management
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rDlMa6F69D9Jx9lZ5v4Gp7n9ZcT4QNb5
+      - RABBITMQ_NODENAME=rabbit@rabbitmq2
+    ports:
+      - "5674:5672"
+      - "15674:15672"
+
+  rabbitmq3:
+    image: rabbitmq:3.8-management
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rDlMa6F69D9Jx9lZ5v4Gp7n9ZcT4QNb5
+      - RABBITMQ_NODENAME=rabbit@rabbitmq3
+    ports:
+      - "5675:5672"
+      - "15675:15672"
