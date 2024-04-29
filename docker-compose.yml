@@ -4,7 +4,7 @@ services:
     rabbitmq:
         image: rabbitmq:3-management-alpine
         container_name: rabbitmq
-        restart: always
+        #restart: always
         ports:
             - 5672:5672
             - 15672:15672
@@ -14,25 +14,29 @@ services:
         environment:
             - RABBITMQ_DEFAULT_USER=admin
             - RABBITMQ_DEFAULT_PASS=admin
+        healthcheck:
+          test: ["CMD", "rabbitmqctl", "status"]
+          interval: 10s
+          timeout: 5s
+          retries: 3
 
     postgres:
         image: postgres:latest
         container_name: postgres
         environment:
-          POSTGRES_DB: bco-pgto
+          POSTGRES_DB: bco_pgto
           POSTGRES_USER: docker
           POSTGRES_PASSWORD: docker
         ports:
           - "5432:5432"        
         volumes:
-          - postgres_data:/var/lib/postgresql/data  
-        depends_on:
-          - rabbitmq
-#        healthcheck:
-#          test: ["CMD-SHELL", "echo \"SELECT 1;\" | psql -h postgres -U $POSTGRES_USER -d $POSTGRES_DB"]
-#          interval: 10s
-#          timeout: 5s
-#          retries: 3
+          - postgres_data:/var/lib/postgresql/data   
+        healthcheck:
+          test: ["CMD-SHELL", "PGUSER=docker PGPASSWORD=docker pg_isready -d bco_pgto"]
+          interval: 30s
+          timeout: 15s
+          retries: 3
+          #start_period: 80s
 
     srv-pagamento:
         build:
@@ -42,26 +46,32 @@ services:
           - "8080:8080" 
         restart: unless-stopped
         depends_on:
-          - postgres
-            #condition: service_healthy
+          postgres:
+            condition: service_healthy
+          rabbitmq:
+            condition: service_healthy
 
     srv-entrega:
         build:
           context: ./srv-entrega
         env_file: ./env/app.env
-        restart: unless-stopped
+        #restart: unless-stopped
         depends_on:
-          - postgres
+          #postgres:
             #condition: service_healthy
+          rabbitmq:
+            condition: service_healthy  
 
     srv-pedido:
         build:
           context: ./srv-pedido
         env_file: ./env/app.env
-        restart: unless-stopped
+        #restart: unless-stopped
         depends_on:
-          - postgres
+          #postgres:
             #condition: service_healthy
+          rabbitmq:
+            condition: service_healthy
 
 volumes:
   postgres_data:
